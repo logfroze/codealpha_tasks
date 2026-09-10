@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <linearGradient id="spring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="50%" stop-color="#065f46"/>
+      <stop offset="100%" stop-color="#022c22"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#spring)"/>
+  <!-- Botanical sunburst motif -->
+  <g transform="translate(300, 230)">
+    <circle cx="0" cy="0" r="120" fill="none" stroke="#6ee7b7" stroke-width="1.5" stroke-dasharray="3,5" opacity="0.5"/>
+    <circle cx="0" cy="0" r="70" fill="#047857" opacity="0.6"/>
+    <polygon points="0,-90 20,-30 80,-30 35,10 55,70 0,35 -55,70 -35,10 -80,-30 -20,-30" fill="#a7f3d0" opacity="0.8"/>
+  </g>
+  <text x="300" y="470" font-family="'Segoe UI', system-ui, sans-serif" font-size="24" font-weight="700" fill="#ecfdf5" text-anchor="middle" letter-spacing="3">SPRING ALLEGRO</text>
+  <text x="300" y="505" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="400" fill="#6ee7b7" text-anchor="middle" letter-spacing="3">ANTONIO VIVALDI • VIOLIN</text>
+  <rect x="24" y="24" width="552" height="552" stroke="#34d399" stroke-width="1" fill="none" opacity="0.35"/>
+</svg>

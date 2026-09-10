@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <linearGradient id="autumn" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#7c2d12"/>
+      <stop offset="50%" stop-color="#9a3412"/>
+      <stop offset="100%" stop-color="#292524"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#autumn)"/>
+  <!-- Stylized leaf & geometric piano pattern -->
+  <g transform="translate(300, 230)">
+    <circle cx="0" cy="0" r="140" fill="none" stroke="#fdba74" stroke-width="2" opacity="0.4"/>
+    <circle cx="0" cy="0" r="100" fill="#ea580c" opacity="0.2"/>
+    <path d="M0 -110 C 60 -50 90 20 0 90 C -90 20 -60 -50 0 -110 Z" fill="#ffedd5" opacity="0.85"/>
+    <line x1="0" y1="-80" x2="0" y2="70" stroke="#c2410c" stroke-width="2"/>
+    <line x1="0" y1="-40" x2="35" y2="-10" stroke="#c2410c" stroke-width="1.5"/>
+    <line x1="0" y1="-40" x2="-35" y2="-10" stroke="#c2410c" stroke-width="1.5"/>
+    <line x1="0" y1="0" x2="40" y2="30" stroke="#c2410c" stroke-width="1.5"/>
+    <line x1="0" y1="0" x2="-40" y2="30" stroke="#c2410c" stroke-width="1.5"/>
+  </g>
+  <text x="300" y="475" font-family="'Segoe UI', system-ui, sans-serif" font-size="24" font-weight="700" fill="#ffedd5" text-anchor="middle" letter-spacing="3">MAPLE LEAF RAG</text>
+  <text x="300" y="510" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="400" fill="#fdba74" text-anchor="middle" letter-spacing="3">RAGTIME CLASSICS</text>
+  <rect x="24" y="24" width="552" height="552" stroke="#fdba74" stroke-width="1" fill="none" opacity="0.3"/>
+</svg>

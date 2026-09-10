@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VibeTunes — CodeAlpha Music Player</title>
+    <meta name="description" content="VibeTunes responsive music player with modern clean UI, playlist queue, real-time playback controls and keyboard shortcuts." />
+    <meta property="og:title" content="VibeTunes — CodeAlpha Music Player" />
+    <meta property="og:description" content="VibeTunes responsive music player with modern clean UI, playlist queue, real-time playback controls and keyboard shortcuts." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Subtle ambient concentric rings in background inspired by showcase design -->
+    <div class="bg-concentric-circles" aria-hidden="true">
+      <div class="concentric-circle ring-1"></div>
+      <div class="concentric-circle ring-2"></div>
+      <div class="concentric-circle ring-3"></div>
+    </div>
+
+    <div class="app-container">
+      <!-- Top Global Navigation Bar (VibeTunes Header) -->
+      <header class="vibetunes-header" id="main-header">
+        <div class="header-left">
+          <span class="vibetunes-logo">VibeTunes</span>
+        </div>
+
+        <div class="header-center">
+          <div class="header-task-badge" aria-label="CodeAlpha Internship Task 04">CodeAlpha - FrontEnd - Task 04</div>
+        </div>
+
+        <div class="header-right">
+          <span class="track-count-pill" id="header-track-count">5 Tracks</span>
+        </div>
+      </header>
+
+      <!-- Audio Error Notice (Graceful Recovery) -->
+      <aside class="error-banner hidden" id="audio-error-banner" role="alert" aria-live="assertive">
+        <div class="error-content">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          <span id="error-message">Unable to load audio file.</span>
+        </div>
+        <button type="button" class="btn-error-action" id="btn-error-retry">Skip to Next</button>
+      </aside>
+
+      <!-- Main Showcase Grid (Phone 3: Player on Left, Phone 2: Discovery Queue on Right) -->
+      <main class="vibetunes-main-grid">
+
+        <!-- ================================================================= -->
+        <!-- LEFT COLUMN: NOW PLAYING SCREEN (Directly inspired by Image 3)   -->
+        <!-- ================================================================= -->
+        <section class="device-card player-device" id="player-card" aria-label="Now Playing Card">
+          
+          <!-- Top Card Action Bar -->
+          <div class="player-top-bar">
+            <button type="button" class="btn-circle-action" id="btn-back-action" aria-label="Previous playlist view" title="Back">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6" />
+              </svg>
+            </button>
+            <div class="now-playing-label">Now Playing</div>
+            <div class="btn-action-spacer" aria-hidden="true"></div>
+          </div>
+
+          <!-- Album Artwork Stage with 3D Layered Shelf & Vinyl Peak -->
+          <div class="artwork-stage-wrapper">
+            <!-- Rotating Vinyl disc behind artwork -->
+            <div class="vinyl-disc" id="vinyl-disc" aria-hidden="true">
+              <div class="vinyl-red-ring"></div>
+              <div class="vinyl-center-hole"></div>
+            </div>
+
+            <!-- 3D Shelf Platform underneath the card (as seen in VibeTunes reference) -->
+            <div class="artwork-3d-shelf" aria-hidden="true"></div>
+
+            <!-- Primary Artwork Squircle Frame -->
+            <div class="artwork-squircle-frame">
+              <img
+                id="track-art"
+                class="track-artwork"
+                src="assets/images/cover1.jpg"
+                alt="Clair de Lune Album Artwork"
+                width="340"
+                height="340"
+                loading="eager"
+              />
+
+              <!-- Floating Live Status Badge -->
+              <div class="artwork-pill-badge" id="artwork-status-badge">
+                <span class="badge-dot" id="badge-dot"></span>
+                <span id="badge-text">Paused</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Song Title & Artist Area (Bold Orange Display Typography) -->
+          <div class="track-info-block">
+            <h2 class="track-title-main" id="track-title">Clair de Lune</h2>
+            <p class="track-artist-main">by <span id="track-artist">Claude Debussy</span></p>
+            <span class="hidden" id="track-album">Suite bergamasque</span>
+
+            <!-- Quick Action Icons Row (Heart, Save, Soundwave badge) -->
+            <div class="track-quick-actions">
+              <button type="button" class="btn-micro-action" id="btn-favorite" aria-label="Favorite track" title="Like song">
+                <svg id="icon-heart" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                </svg>
+              </button>
+
+              <button type="button" class="btn-micro-action" id="btn-download-action" aria-label="Acoustic Master" title="Master Audio">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+              </button>
+
+              <button type="button" class="btn-micro-action" id="btn-share-action" aria-label="Share track" title="Share">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="18" cy="5" r="3" />
+                  <circle cx="6" cy="12" r="3" />
+                  <circle cx="18" cy="19" r="3" />
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Progress Slider & Times -->
+          <div class="progress-block">
+            <div class="progress-bar-container" id="progress-container">
+              <input
+                type="range"
+                id="progress-bar"
+                class="custom-range progress-range"
+                min="0"
+                max="100"
+                value="0"
+                step="0.1"
+                aria-label="Audio playback progress"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+              />
+              <div class="progress-fill" id="progress-fill"></div>
+              <div class="progress-hover-line hidden" id="progress-hover-line" aria-hidden="true"></div>
+              <div class="progress-tooltip hidden" id="progress-tooltip" aria-hidden="true">00:00</div>
+            </div>
+
+            <div class="time-row">
+              <span class="time-text" id="current-time">00:00</span>
+              <span class="time-text" id="total-duration">--:--</span>
+            </div>
+          </div>
+
+          <!-- Primary Playback Controls Row -->
+          <div class="playback-controls-row">
+            <!-- Queue / Shuffle button -->
+            <button
+              type="button"
+              class="btn-control btn-secondary"
+              id="btn-shuffle"
+              aria-label="Toggle Shuffle"
+              title="Shuffle: Off"
+              aria-pressed="false"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22" />
+                <path d="m18 2 4 4-4 4" />
+                <path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2" />
+                <path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8" />
+                <path d="m18 14 4 4-4 4" />
+              </svg>
+            </button>
+
+            <!-- Skip Previous -->
+            <button
+              type="button"
+              class="btn-control btn-secondary btn-skip"
+              id="btn-prev"
+              aria-label="Previous Track"
+              title="Previous Track"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+                <polygon points="19 20 9 12 19 4 19 20" />
+                <rect x="5" y="4" width="2.5" height="16" rx="1" />
+              </svg>
+            </button>
+
+            <!-- HERO VIBRANT ORANGE PLAY/PAUSE BUTTON -->
+            <button
+              type="button"
+              class="btn-hero-play"
+              id="btn-play-pause"
+              aria-label="Play Track"
+              title="Play"
+            >
+              <!-- Play icon -->
+              <svg id="icon-play" class="icon-play" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+                <polygon points="7 4 20 12 7 20 7 4" />
+              </svg>
+              <!-- Pause icon -->
+              <svg id="icon-pause" class="icon-pause hidden" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+                <rect x="6" y="4" width="4" height="16" rx="1.5" />
+                <rect x="14" y="4" width="4" height="16" rx="1.5" />
+              </svg>
+            </button>
+
+            <!-- Skip Next -->
+            <button
+              type="button"
+              class="btn-control btn-secondary btn-skip"
+              id="btn-next"
+              aria-label="Next Track"
+              title="Next Track"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true">
+                <polygon points="5 4 15 12 5 20 5 4" />
+                <rect x="16.5" y="4" width="2.5" height="16" rx="1" />
+              </svg>
+            </button>
+
+            <!-- Repeat Mode -->
+            <button
+              type="button"
+              class="btn-control btn-secondary"
+              id="btn-repeat"
+              aria-label="Cycle Repeat Mode"
+              title="Repeat: Off"
+              aria-pressed="false"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m17 2 4 4-4 4" />
+                <path d="M3 11v-1a4 4 0 0 1 4-4h14" />
+                <path d="m7 22-4-4 4-4" />
+                <path d="M21 13v1a4 4 0 0 1-4 4H3" />
+              </svg>
+              <span class="repeat-indicator" id="repeat-indicator"></span>
+            </button>
+          </div>
+
+          <!-- Volume & Device Bar -->
+          <div class="volume-slider-bar">
+            <button
+              type="button"
+              class="btn-mute-toggle"
+              id="btn-mute"
+              aria-label="Mute or Unmute audio"
+              title="Mute / Unmute"
+            >
+              <!-- High Volume Icon -->
+              <svg id="vol-icon-high" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+              </svg>
+              <!-- Low Volume Icon -->
+              <svg id="vol-icon-low" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+              </svg>
+              <!-- Muted Icon -->
+              <svg id="vol-icon-muted" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <line x1="23" y1="9" x2="17" y2="15" />
+                <line x1="17" y1="9" x2="23" y2="15" />
+              </svg>
+            </button>
+
+            <div class="volume-track-wrapper">
+              <input
+                type="range"
+                id="volume-slider"
+                class="custom-range volume-range"
+                min="0"
+                max="100"
+                value="80"
+                step="1"
+                aria-label="Audio volume"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="80"
+              />
+              <div class="volume-fill" id="volume-fill"></div>
+            </div>
+
+            <span class="volume-value-label" id="volume-label">80%</span>
+          </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- RIGHT COLUMN: DISCOVERY & PLAYLIST (Inspired by Image 2)          -->
+        <!-- ================================================================= -->
+        <aside class="device-card playlist-device" id="playlist-panel" aria-label="Today Playlist Queue">
+          
+          <!-- Search Bar -->
+          <div class="search-music-bar">
+            <div class="search-input-group">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8c93a0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              <input
+                type="search"
+                id="playlist-search-input"
+                class="search-input"
+                placeholder="Search music, classical, artist..."
+                aria-label="Search music playlist"
+              />
+            </div>
+          </div>
+
+          <!-- "Today Play list" Section Header -->
+          <div class="section-title-row">
+            <h3 class="section-heading">Playlist</h3>
+            <div class="playlist-header-actions">
+              <!-- Hidden file input for audio upload -->
+              <input
+                type="file"
+                id="upload-music-input"
+                accept="audio/*"
+                multiple
+                aria-label="Upload audio files"
+                style="display:none"
+              />
+              <!-- Upload Button -->
+              <button type="button" class="btn-upload-music" id="btn-upload-music" title="Upload new music from your device">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                Upload Music
+              </button>
+            </div>
+          </div>
+
+          <!-- Featured Squircle Cards (Periwinkle & Purple from reference image) -->
+          <div class="curated-cards-row">
+            <div class="curated-card card-periwinkle" role="button" tabindex="0" title="Top Masterpieces">
+              <div class="card-icon-art">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <circle cx="12" cy="12" r="3" fill="#ffffff" />
+                  <path d="m10 15 5-3-5-3v6Z" fill="#ffffff" />
+                </svg>
+              </div>
+              <div class="card-meta">
+                <span class="card-tag">Curated</span>
+                <h4 class="card-title">Top 10 Classical</h4>
+              </div>
+            </div>
+
+            <div class="curated-card card-violet" role="button" tabindex="0" title="Acoustic Ragtime">
+              <div class="card-icon-art">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 18V5l12-2v13" />
+                  <circle cx="6" cy="18" r="3" fill="#ffffff" />
+                  <circle cx="18" cy="16" r="3" fill="#ffffff" />
+                </svg>
+              </div>
+              <div class="card-meta">
+                <span class="card-tag">Acoustic</span>
+                <h4 class="card-title">Piano Ragtime</h4>
+              </div>
+            </div>
+          </div>
+
+          <!-- "Queue & History" Section Header -->
+          <div class="section-title-row" style="margin-top: 10px;">
+            <h3 class="section-heading">Queue &amp; History</h3>
+            <span class="section-counter" id="playlist-status-badge">Auto-playing</span>
+          </div>
+
+          <!-- Dynamic Playlist Items Container -->
+          <ul class="clean-playlist-list" id="playlist-items" role="list">
+            <!-- Rendered dynamically by JavaScript -->
+          </ul>
+        </aside>
+
+      </main>
+    </div>
+
+    <!-- Upload Toast Notification -->
+    <div class="upload-toast hidden" id="upload-toast" role="status" aria-live="polite">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+      <span id="upload-toast-msg">1 track added to playlist!</span>
+    </div>
+
+    <!-- Real HTML5 Audio Element -->
+    <audio id="audio-element" preload="metadata"></audio>
+
+    <script src="./script.js" defer></script>
+  </body>
+</html>

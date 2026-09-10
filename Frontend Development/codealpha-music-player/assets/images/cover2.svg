@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <linearGradient id="warm" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#451a03"/>
+      <stop offset="40%" stop-color="#78350f"/>
+      <stop offset="100%" stop-color="#1c1917"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#warm)"/>
+  <!-- Vinyl record graphic -->
+  <circle cx="300" cy="250" r="170" fill="#18181b" stroke="#27272a" stroke-width="2"/>
+  <circle cx="300" cy="250" r="145" fill="none" stroke="#27272a" stroke-width="1" stroke-dasharray="4,3"/>
+  <circle cx="300" cy="250" r="120" fill="none" stroke="#27272a" stroke-width="1" stroke-dasharray="6,4"/>
+  <circle cx="300" cy="250" r="95" fill="none" stroke="#3f3f46" stroke-width="1"/>
+  <!-- Vinyl label -->
+  <circle cx="300" cy="250" r="65" fill="#d97706"/>
+  <circle cx="300" cy="250" r="20" fill="#fbbf24"/>
+  <circle cx="300" cy="250" r="8" fill="#1c1917"/>
+  <!-- Geometric accents -->
+  <polygon points="300,50 320,80 280,80" fill="#f59e0b" opacity="0.8"/>
+  <!-- Typography -->
+  <text x="300" y="490" font-family="'Segoe UI', system-ui, sans-serif" font-size="26" font-weight="700" fill="#fef3c7" text-anchor="middle" letter-spacing="3">THE ENTERTAINER</text>
+  <text x="300" y="525" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="500" fill="#d97706" text-anchor="middle" letter-spacing="4">SCOTT JOPLIN • 1902</text>
+  <rect x="24" y="24" width="552" height="552" stroke="#b45309" stroke-width="1.5" fill="none" opacity="0.4"/>
+</svg>

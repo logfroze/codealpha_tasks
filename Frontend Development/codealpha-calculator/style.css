@@ -1,0 +1,707 @@
+/* ==========================================================================
+   CodeAlpha Calculator - Tactile Hardware Theme (Image 3 Reference)
+   Pure CSS - Modern, soft-touch ergonomic handheld calculator design.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CSS Variables & Themes
+   -------------------------------------------------------------------------- */
+:root {
+  /* Metrics */
+  --radius-calc: 34px;
+  --radius-display: 20px;
+  --radius-btn: 18px;
+  --radius-sm: 8px;
+  --font-main: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-digit: "Outfit", "Plus Jakarta Sans", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", monospace;
+  --transition-fast: 0.12s ease;
+  --transition-normal: 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Dark Theme (Default - Left Device in Image 3) */
+  --bg-page: #e2e8f0;
+  --bg-page-gradient: radial-gradient(circle at 50% 30%, #e8eef6 0%, #d4dfec 100%);
+  --text-page: #475569;
+  --task-title-color: #0f172a;
+
+  /* Chassis */
+  --calc-bg: #151821;
+  --calc-border: rgba(255, 255, 255, 0.05);
+  --calc-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.65), 0 10px 25px -10px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  --header-text: #f1f5f9;
+  --header-muted: #94a3b8;
+  --header-border: rgba(255, 255, 255, 0.07);
+  --badge-bg: #222735;
+  --badge-text: #94a3b8;
+
+  /* LCD Screen (Distinctive Sage/Pistachio Green from Image 3) */
+  --lcd-bg: linear-gradient(180deg, #9bb58f 0%, #8ea882 100%);
+  --lcd-border: #10131a;
+  --lcd-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.45), inset 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 -2px 4px rgba(255, 255, 255, 0.15), 0 1px 0 rgba(255, 255, 255, 0.08);
+  --lcd-text: #122014;
+  --lcd-subtext: #2a3d2c;
+  --lcd-error: #991b1b;
+
+  /* Tactile Squircle Buttons (Dark) */
+  --btn-bg: #1f232e;
+  --btn-hover: #262b38;
+  --btn-active: #191c25;
+  --btn-border: rgba(255, 255, 255, 0.04);
+  --btn-shadow: 0 5px 12px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.08), inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+  --btn-active-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), inset 0 2px 5px rgba(0, 0, 0, 0.5);
+
+  --btn-num-text: #f1f5f9;
+  --btn-fn-text: #94a3b8;
+  --btn-op-text: #60a5fa;
+  --btn-clear-color: #ff781f; /* Iconic orange 'C' as in reference */
+
+  --btn-op-selected-bg: #2563eb;
+  --btn-op-selected-text: #ffffff;
+  --btn-op-selected-shadow: 0 4px 14px rgba(37, 99, 235, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+
+  --btn-eq-bg: #ea580c;
+  --btn-eq-hover: #f97316;
+  --btn-eq-text: #ffffff;
+  --btn-eq-shadow: 0 5px 14px rgba(234, 88, 12, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+
+  /* History Panel */
+  --panel-bg: #1a1e28;
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --item-hover: #232836;
+}
+
+[data-theme="light"] {
+  /* Light Theme (Right Device in Image 3) */
+  --bg-page: #e8eff6;
+  --bg-page-gradient: radial-gradient(circle at 50% 30%, #f0f5fa 0%, #dbe5f0 100%);
+  --text-page: #475569;
+
+  /* Chassis */
+  --calc-bg: #ffffff;
+  --calc-border: rgba(0, 0, 0, 0.04);
+  --calc-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.16), 0 4px 14px rgba(15, 23, 42, 0.04), inset 0 1px 0 #ffffff;
+
+  --header-text: #0f172a;
+  --header-muted: #64748b;
+  --header-border: rgba(0, 0, 0, 0.06);
+  --badge-bg: #f1f5f9;
+  --badge-text: #475569;
+
+  /* LCD Screen */
+  --lcd-bg: linear-gradient(180deg, #b9ceab 0%, #acc29e 100%);
+  --lcd-border: #e2e8f0;
+  --lcd-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.18), inset 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 -2px 3px rgba(255, 255, 255, 0.8), 0 2px 5px rgba(255, 255, 255, 0.9);
+  --lcd-text: #122014;
+  --lcd-subtext: #283c2a;
+  --lcd-error: #991b1b;
+
+  /* Tactile Squircle Buttons (Light) */
+  --btn-bg: #ffffff;
+  --btn-hover: #f8fafc;
+  --btn-active: #edf2f7;
+  --btn-border: rgba(0, 0, 0, 0.04);
+  --btn-shadow: 0 5px 12px rgba(15, 23, 42, 0.07), 0 1px 3px rgba(15, 23, 42, 0.03), inset 0 1px 0 #ffffff;
+  --btn-active-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(0, 0, 0, 0.07);
+
+  --btn-num-text: #0f172a;
+  --btn-fn-text: #475569;
+  --btn-op-text: #2563eb;
+  --btn-clear-color: #ea580c;
+
+  --btn-op-selected-bg: #2563eb;
+  --btn-op-selected-text: #ffffff;
+  --btn-op-selected-shadow: 0 4px 14px rgba(37, 99, 235, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+  --btn-eq-bg: #ea580c;
+  --btn-eq-hover: #f97316;
+  --btn-eq-text: #ffffff;
+  --btn-eq-shadow: 0 5px 14px rgba(234, 88, 12, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+  /* History Panel */
+  --panel-bg: #f8fafc;
+  --panel-border: rgba(0, 0, 0, 0.08);
+  --item-hover: #edf2f7;
+}
+
+/* --------------------------------------------------------------------------
+   Reset & Base Styles
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-page);
+  background-image: var(--bg-page-gradient);
+  background-attachment: fixed;
+  color: var(--header-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  line-height: 1.5;
+  transition: background-color var(--transition-normal);
+}
+
+/* --------------------------------------------------------------------------
+   App Container & Calculator Chassis
+   -------------------------------------------------------------------------- */
+.app-wrapper {
+  width: 100%;
+  max-width: 375px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.125rem;
+}
+
+/* --------------------------------------------------------------------------
+   Top Screen Header (Outside Calculator Frame)
+   -------------------------------------------------------------------------- */
+.page-top-header {
+  width: 100%;
+  text-align: center;
+  padding: 0.125rem 0 0;
+}
+
+.task-title {
+  font-family: var(--font-main);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--task-title-color, #0f172a);
+  line-height: 1.25;
+  user-select: none;
+}
+
+/* Calculator Card - Ergonomic handheld terminal */
+.calculator {
+  width: 100%;
+  background-color: var(--calc-bg);
+  border: 1px solid var(--calc-border);
+  border-radius: var(--radius-calc);
+  box-shadow: var(--calc-shadow);
+  padding: 1.625rem 1.375rem 1.75rem 1.375rem;
+  position: relative;
+  overflow: hidden;
+  transition: background-color var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+/* Top Device Header */
+.calc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.125rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--header-border);
+}
+
+.brand-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+
+.brand-title {
+  font-family: var(--font-main);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--header-text);
+}
+
+.brand-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  background-color: var(--badge-bg);
+  color: var(--badge-text);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Header Action Controls */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.icon-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--header-muted);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.icon-btn:hover {
+  background-color: var(--badge-bg);
+  color: var(--header-text);
+}
+
+.icon-btn:active {
+  transform: scale(0.92);
+}
+
+.icon-btn:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 1px;
+}
+
+.icon-btn.active {
+  color: #3b82f6;
+  background-color: var(--badge-bg);
+}
+
+.history-count-badge {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  background-color: #ea580c;
+  color: #ffffff;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Calculation History Drawer
+   -------------------------------------------------------------------------- */
+.history-drawer {
+  background-color: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-display);
+  padding: 0.875rem;
+  margin-bottom: 1rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 160px;
+  animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.history-drawer.is-open {
+  display: flex;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.history-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--header-muted);
+}
+
+.clear-history-btn {
+  background: none;
+  border: none;
+  color: var(--header-muted);
+  font-size: 0.72rem;
+  cursor: pointer;
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  transition: color var(--transition-fast);
+}
+
+.clear-history-btn:hover {
+  color: #ef4444;
+}
+
+.history-list {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-right: 0.25rem;
+}
+
+.history-list::-webkit-scrollbar {
+  width: 4px;
+}
+.history-list::-webkit-scrollbar-thumb {
+  background: var(--panel-border);
+  border-radius: 4px;
+}
+
+.history-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0.35rem 0.5rem;
+  border-radius: 8px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: right;
+}
+
+.history-item:hover {
+  background-color: var(--item-hover);
+  border-color: var(--panel-border);
+}
+
+.history-item-exp {
+  font-size: 0.72rem;
+  color: var(--header-muted);
+  font-family: var(--font-digit);
+}
+
+.history-item-res {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--header-text);
+  font-family: var(--font-digit);
+}
+
+.history-empty {
+  text-align: center;
+  padding: 1rem 0;
+  color: var(--header-muted);
+  font-size: 0.8125rem;
+}
+
+/* --------------------------------------------------------------------------
+   Tactile LCD Screen Display Area (Image 3 Style)
+   -------------------------------------------------------------------------- */
+.display-wrapper {
+  background: var(--lcd-bg);
+  border: 1px solid var(--lcd-border);
+  border-radius: var(--radius-display);
+  box-shadow: var(--lcd-shadow);
+  padding: 0.875rem 1.125rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 104px;
+  position: relative;
+  transition: background var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.display-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 20px;
+  gap: 0.5rem;
+}
+
+.secondary-display {
+  font-family: var(--font-main);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--lcd-subtext);
+  text-align: right;
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+}
+
+.copy-btn {
+  background: transparent;
+  border: none;
+  color: var(--lcd-subtext);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.35rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all var(--transition-fast);
+  opacity: 0.75;
+}
+
+.copy-btn:hover {
+  opacity: 1;
+  color: var(--lcd-text);
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.copy-btn:active {
+  transform: scale(0.92);
+}
+
+.copy-tooltip {
+  display: none;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #14532d;
+}
+
+.copy-btn.copied .copy-tooltip {
+  display: inline;
+}
+
+.copy-btn.copied .copy-icon {
+  display: none;
+}
+
+.primary-display-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+  overflow: hidden;
+}
+
+.primary-display {
+  font-family: var(--font-digit);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--lcd-text);
+  line-height: 1.1;
+  text-align: right;
+  word-break: break-all;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  transition: font-size 0.15s ease, color 0.15s ease;
+  user-select: text;
+}
+
+/* Dynamic Font Scaling */
+.primary-display.scale-md {
+  font-size: 2rem;
+}
+
+.primary-display.scale-sm {
+  font-size: 1.55rem;
+}
+
+.primary-display.scale-xs {
+  font-size: 1.25rem;
+}
+
+.primary-display.is-error {
+  color: var(--lcd-error);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: normal;
+  font-family: var(--font-main);
+}
+
+/* --------------------------------------------------------------------------
+   Keypad Grid & Tactile Squircle Buttons (Image 3)
+   -------------------------------------------------------------------------- */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.625rem;
+}
+
+/* Base button */
+.btn {
+  appearance: none;
+  border: 1px solid var(--btn-border);
+  border-radius: var(--radius-btn);
+  background-color: var(--btn-bg);
+  box-shadow: var(--btn-shadow);
+  font-family: var(--font-digit);
+  font-size: 1.25rem;
+  font-weight: 600;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
+  outline: none;
+  position: relative;
+}
+
+.btn:hover {
+  background-color: var(--btn-hover);
+  transform: translateY(-1px);
+}
+
+.btn:active, .btn.is-pressed {
+  background-color: var(--btn-active);
+  transform: translateY(2px);
+  box-shadow: var(--btn-active-shadow);
+}
+
+.btn:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  z-index: 1;
+}
+
+/* Button Variants */
+/* Numbers */
+.btn-num {
+  color: var(--btn-num-text);
+}
+
+/* Function & Utility keys (DEL, %, ±) */
+.btn-func {
+  color: var(--btn-fn-text);
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+/* The signature Orange Clear Key 'C' from Image 3 */
+.btn-clear {
+  color: var(--btn-clear-color) !important;
+  font-weight: 700 !important;
+  font-size: 1.3rem !important;
+}
+
+/* Operators (÷, ×, −, +) */
+.btn-op {
+  color: var(--btn-op-text);
+  font-size: 1.45rem;
+  font-weight: 600;
+}
+
+/* Highlight currently primed pending operator */
+.btn-op.is-selected {
+  background-color: var(--btn-op-selected-bg) !important;
+  color: var(--btn-op-selected-text) !important;
+  box-shadow: var(--btn-op-selected-shadow) !important;
+}
+
+/* Equals Button (=) */
+.btn-eq {
+  background-color: var(--btn-eq-bg);
+  color: var(--btn-eq-text);
+  box-shadow: var(--btn-eq-shadow);
+  font-size: 1.5rem;
+  font-weight: 700;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-eq:hover {
+  background-color: var(--btn-eq-hover);
+  transform: translateY(-1px);
+}
+
+.btn-eq:active, .btn-eq.is-pressed {
+  transform: translateY(2px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   External Footer (Author & Internship Attribution)
+   -------------------------------------------------------------------------- */
+.external-footer {
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--text-page);
+  line-height: 1.4;
+}
+
+.external-footer p {
+  margin-bottom: 0.2rem;
+}
+
+.external-footer strong {
+  color: #1e293b;
+}
+
+[data-theme="dark"] .external-footer strong {
+  color: #334155;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Design
+   -------------------------------------------------------------------------- */
+@media (max-width: 420px) {
+  body {
+    padding: 1rem 0.5rem;
+  }
+
+  .task-title {
+    font-size: 1.05rem;
+  }
+
+  .calculator {
+    padding: 1.25rem 1rem 1.35rem 1rem;
+    border-radius: 28px;
+  }
+
+  .keypad {
+    gap: 0.5rem;
+  }
+
+  .btn {
+    height: 52px;
+    font-size: 1.15rem;
+    border-radius: 14px;
+  }
+
+  .primary-display {
+    font-size: 2.2rem;
+  }
+
+  .primary-display.scale-md {
+    font-size: 1.75rem;
+  }
+
+  .primary-display.scale-sm {
+    font-size: 1.4rem;
+  }
+
+  .primary-display.scale-xs {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .btn {
+    height: 46px;
+    font-size: 1.05rem;
+    border-radius: 12px;
+  }
+
+  .primary-display {
+    font-size: 1.9rem;
+  }
+}
